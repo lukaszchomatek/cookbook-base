@@ -87,7 +87,8 @@
   <main class="main">
     <div class="content">
       <div v-if="loadingList" class="loading">Loading games...</div>
-      <div v-else-if="gameFiles.length === 0" class="empty">There are no games in the <code>games</code> folder.</div>
+
+      <div v-else-if="gameFiles.length === 0" class="empty"> {{gameFiles}} {{loadinglist}} There are no games in the <code>games</code> folder.</div>
 
       <article v-if="!loadingList && gameFiles.length" class="markdown-body">
         <div v-if="loadinggame" class="loading">Loading game <code>{{ selectedName }}</code>…</div>
