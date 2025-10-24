@@ -1,0 +1,1 @@
+Drinking enough water daily is essential for maintaining proper hydration, supporting digestion, and keeping your skin healthy. Aim to drink at least eight 8 glasses of water a day to help your body function at its best.
