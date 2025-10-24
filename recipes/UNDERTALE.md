@@ -14,3 +14,10 @@ The influance of the game was world-wide.
 - Metaton
 - Muffet
 - Asgore
+
+
+
+# SPOLER ALERT!!!!
+Sans is the weakest enemy ;)
+
+Also, Flowey is Asriel lol
