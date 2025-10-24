@@ -1,4 +1,4 @@
-# Visit page: https://d1ma0911.github.io/cookbook-base/
+# Visit page: https://d1ma0911.github.io/Lifehacks-collection/
 
 # Student Cookbook — Collaborative GitHub Pages Application
 
