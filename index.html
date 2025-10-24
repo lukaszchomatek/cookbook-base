@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Student Cookbook</title>
+  <title>Best Games</title>
   <!-- Vue 3 from CDN -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <!-- Marked (Markdown → HTML) -->
@@ -62,20 +62,20 @@
 </head>
 <body>
 <div id="app" class="layout">
-  <!-- Sidebar: recipe list pulled from GitHub API (folder 'recipes') -->
+  <!-- Sidebar: game list pulled from GitHub API (folder 'games') -->
   <aside class="sidebar">
     <header>
-      <h1>Student Cookbook</h1>
+      <h1>Best Games</h1>
     </header>
     <div class="list">
       <div
-        v-for="file in recipeFiles"
+        v-for="file in gameFiles"
         :key="file.name"
         class="item"
         :class="{ active: file.name === selectedName }"
-        @click="selectRecipe(file.name)"
+        @click="selectgame(file.name)"
         role="button"
-        :aria-label="'Open recipe ' + file.name"
+        :aria-label="'Open game ' + file.name"
       >
         {{ file.name.replace(/\.md$/,'') }}
         <small>{{ file.name }}</small>
@@ -86,11 +86,11 @@
   <!-- Main: rendered markdown -->
   <main class="main">
     <div class="content">
-      <div v-if="loadingList" class="loading">Loading recipes...</div>
-      <div v-else-if="recipeFiles.length === 0" class="empty">There are no recipes in the <code>recipes</code> folder.</div>
+      <div v-if="loadingList" class="loading">Loading games...</div>
+      <div v-else-if="gameFiles.length === 0" class="empty">There are no games in the <code>games</code> folder.</div>
 
-      <article v-if="!loadingList && recipeFiles.length" class="markdown-body">
-        <div v-if="loadingRecipe" class="loading">Loading recipe <code>{{ selectedName }}</code>…</div>
+      <article v-if="!loadingList && gameFiles.length" class="markdown-body">
+        <div v-if="loadinggame" class="loading">Loading game <code>{{ selectedName }}</code>…</div>
         <div v-else-if="error" class="error">Błąd: {{ error }}</div>
         <div v-else v-html="renderedHtml"></div>
       </article>
@@ -101,7 +101,7 @@
         <div class="meta">
           <span class="pill">Repo: <a :href="repoUrl" target="_blank" rel="noopener">{{ owner }}/{{ repo }}</a></span>
           <span class="pill">Branch: {{ branch }}</span>
-          <span class="pill">Folder: recipes/</span>
+          <span class="pill">Folder: games/</span>
         </div>
         <div>
           <a :href="issuesUrl" target="_blank" rel="noopener">Create an issue →</a>
@@ -117,22 +117,22 @@ const { createApp } = Vue;
 createApp({
   data(){
     return {
-      owner: 'lukaszchomatek',
-      repo: 'cookbook-base',
+      owner: 'Rincekk',
+      repo: 'Best Games',
       branch: 'master',
-      recipesDir: 'recipes',
+      gamesDir: 'games',
 
-      recipeFiles: [],
+      gameFiles: [],
       selectedName: '',
       renderedHtml: '',
       loadingList: false,
-      loadingRecipe: false,
+      loadinggame: false,
       error: ''
     }
   },
   computed: {
     apiListUrl(){
-      const base = `https://api.github.com/repos/${this.owner}/${this.repo}/contents/${this.recipesDir}`;
+      const base = `https://api.github.com/repos/${this.owner}/${this.repo}/contents/${this.gamesDir}`;
       const ref = `?ref=${encodeURIComponent(this.branch)}`;
       return base + ref;
     },
@@ -149,7 +149,7 @@ createApp({
     }
   },
   methods: {
-    async fetchRecipes(){
+    async fetchgames(){
       try {
         this.loadingList = true;
         this.error = '';
@@ -158,9 +158,9 @@ createApp({
           throw new Error(`GitHub API ${res.status} ${res.statusText}`);
         }
         const data = await res.json();
-        this.recipeFiles = (Array.isArray(data) ? data : []).filter(f => f.type === 'file' && /\.md$/i.test(f.name));
-        if(this.recipeFiles.length && !this.selectedName){
-          this.selectRecipe(this.recipeFiles[0].name);
+        this.gameFiles = (Array.isArray(data) ? data : []).filter(f => f.type === 'file' && /\.md$/i.test(f.name));
+        if(this.gameFiles.length && !this.selectedName){
+          this.selectgame(this.gameFiles[0].name);
         }
       } catch(e){
         this.error = e.message || String(e);
@@ -168,17 +168,17 @@ createApp({
         this.loadingList = false;
       }
     },
-    async selectRecipe(name){
+    async selectgame(name){
       if(!name) return;
       this.selectedName = name;
-      await this.fetchRecipeMarkdown(name);
+      await this.fetchgameMarkdown(name);
     },
-    async fetchRecipeMarkdown(name){
+    async fetchgameMarkdown(name){
       try {
-        this.loadingRecipe = true;
+        this.loadinggame = true;
         this.error = '';
         const pageBase = window.location.origin + this.basePath;
-        const url = `${pageBase}/${this.recipesDir}/${encodeURIComponent(name)}`;
+        const url = `${pageBase}/${this.gamesDir}/${encodeURIComponent(name)}`;
         const res = await fetch(url);
         if(!res.ok){
           throw new Error(`Nie udało się pobrać pliku: ${name} (${res.status})`);
@@ -192,12 +192,12 @@ createApp({
         this.error = e.message || String(e);
         this.renderedHtml = '';
       } finally {
-        this.loadingRecipe = false;
+        this.loadinggame = false;
       }
     }
   },
   mounted(){
-    this.fetchRecipes();
+    this.fetchgames();
   }
 }).mount('#app');
 </script>
