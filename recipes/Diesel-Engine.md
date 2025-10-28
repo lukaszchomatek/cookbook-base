@@ -1,1 +1,1 @@
-Check your battery connections for corrosion and make sure they’re tight.
+Check your battery connections for corrosion and make sure they’re tight. 
