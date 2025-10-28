@@ -1,4 +1,4 @@
-# Visit page: https://lukaszchomatek.github.io/cookbook-base/
+# Visit page: https://duraj1.github.io/technological-compendium/
 
 # Student Cookbook — Collaborative GitHub Pages Application
 
