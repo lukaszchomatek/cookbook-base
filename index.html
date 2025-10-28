@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Student Cookbook</title>
+  <title>Dog breeds</title>
   <!-- Vue 3 from CDN -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <!-- Marked (Markdown → HTML) -->
@@ -62,10 +62,10 @@
 </head>
 <body>
 <div id="app" class="layout">
-  <!-- Sidebar: recipe list pulled from GitHub API (folder 'recipes') -->
+  <!-- Sidebar: recipe list pulled from GitHub API (folder 'breeds') -->
   <aside class="sidebar">
     <header>
-      <h1>Student Cookbook</h1>
+      <h1>Breeds</h1>
     </header>
     <div class="list">
       <div
@@ -86,11 +86,11 @@
   <!-- Main: rendered markdown -->
   <main class="main">
     <div class="content">
-      <div v-if="loadingList" class="loading">Loading recipes...</div>
-      <div v-else-if="recipeFiles.length === 0" class="empty">There are no recipes in the <code>recipes</code> folder.</div>
+      <div v-if="loadingList" class="loading">Loading breeds...</div>
+      <div v-else-if="recipeFiles.length === 0" class="empty">There are no breeds in the <code>breeds</code> folder.</div>
 
       <article v-if="!loadingList && recipeFiles.length" class="markdown-body">
-        <div v-if="loadingRecipe" class="loading">Loading recipe <code>{{ selectedName }}</code>…</div>
+        <div v-if="loadingRecipe" class="loading">Loading breeds <code>{{ selectedName }}</code>…</div>
         <div v-else-if="error" class="error">Błąd: {{ error }}</div>
         <div v-else v-html="renderedHtml"></div>
       </article>
@@ -101,7 +101,7 @@
         <div class="meta">
           <span class="pill">Repo: <a :href="repoUrl" target="_blank" rel="noopener">{{ owner }}/{{ repo }}</a></span>
           <span class="pill">Branch: {{ branch }}</span>
-          <span class="pill">Folder: recipes/</span>
+          <span class="pill">Folder: breeds/</span>
         </div>
         <div>
           <a :href="issuesUrl" target="_blank" rel="noopener">Create an issue →</a>
@@ -117,10 +117,10 @@ const { createApp } = Vue;
 createApp({
   data(){
     return {
-      owner: 'lukaszchomatek',
+      owner: 'antgrabarz',
       repo: 'cookbook-base',
       branch: 'master',
-      recipesDir: 'recipes',
+      breedsDir: 'breeds',
 
       recipeFiles: [],
       selectedName: '',
@@ -132,7 +132,7 @@ createApp({
   },
   computed: {
     apiListUrl(){
-      const base = `https://api.github.com/repos/${this.owner}/${this.repo}/contents/${this.recipesDir}`;
+      const base = `https://api.github.com/repos/${this.owner}/${this.repo}/contents/${this.breedsDir}`;
       const ref = `?ref=${encodeURIComponent(this.branch)}`;
       return base + ref;
     },
@@ -178,7 +178,7 @@ createApp({
         this.loadingRecipe = true;
         this.error = '';
         const pageBase = window.location.origin + this.basePath;
-        const url = `${pageBase}/${this.recipesDir}/${encodeURIComponent(name)}`;
+        const url = `${pageBase}/${this.breedsDir}/${encodeURIComponent(name)}`;
         const res = await fetch(url);
         if(!res.ok){
           throw new Error(`Nie udało się pobrać pliku: ${name} (${res.status})`);
