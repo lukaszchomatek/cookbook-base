@@ -15,5 +15,4 @@ Turn off notifications and keep your study area clean and quiet.
 ## 5. Sleep well
 A rested brain remembers more and learns faster.
 
-## 6. Walk around the room
-When you're walking in circles, when reading something, there is a posibility that you will learn faster.
+
